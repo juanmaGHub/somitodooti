@@ -23,11 +23,28 @@ class TestTelecomServiceConsumption(TransactionCase):
         }
         cls.consumption_1 = cls.telecom_service_consumption.create(cls.telecom_service_consumption_data)
         cls.server_base_url = cls.env['ir.config_parameter'].sudo().get_param('web.base.url')
-        cls.headers = {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Access-Control-Allow-Methods': 'POST'}
+        cls.headers = {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'}
+
+        # Authenticate user in the API
+        cls.auth_url = cls.server_base_url + '/telecomservice/api/v2/authenticate'
+        cls.auth_data = {
+            "jsonrpc": "2.0",
+            "params": {
+                'login': 'admin',
+                'password': 'admin',
+            },
+        }
+        cls.cookies = None
 
     def setUp(self):
         super(TestTelecomServiceConsumption, self).setUp()
         self.assertEqual(self.consumption_1.id, self.telecom_service_consumption.search([('id', '=', self.consumption_1.id)]).id, "Telecom Service Consumption Record should be created")
+
+    def _set_cookies(self):
+        response = requests.post(self.auth_url, headers=self.headers, data=json.dumps(self.auth_data))
+        self.assertEqual(response.status_code, 200)
+        self.cookies = response.cookies
+        return self.cookies
 
     def test_telecom_service_consumption(self):
         self.assertTrue(self.consumption_1.id, "Telecom Service Consumption Record should be created")
@@ -57,20 +74,20 @@ class TestTelecomServiceConsumption(TransactionCase):
         self.assertIn(self.consumption_1, consumptions, "Consumption should be included in last month's records")
 
     def test_api_create_consumption(self):
+        cookies = self._set_cookies()
+
         date_now_iso = datetime.now().isoformat()
-        url = self.server_base_url + '/telecomservice/api/consumption/create'
+        url = self.server_base_url + '/telecomservice/api/v2/consumption/create'
         data = {
             "jsonrpc": "2.0",
             "params": {
-                'login': 'admin',
-                'password': 'admin',
                 'product_tmpl_id': self.telecom_service.id,
                 'consumption_timestamp': date_now_iso,
                 'consumption_qty': 15,
                 'k_invalid_field': 'will be ignored'
             },
         }
-        response = requests.post(url, headers=self.headers, data=json.dumps(data))
+        response = requests.post(url, headers=self.headers, data=json.dumps(data), cookies=cookies)
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json().get('result')), 1, "One record should be created")
@@ -80,41 +97,35 @@ class TestTelecomServiceConsumption(TransactionCase):
         self.assertEqual(response.json().get('result')[0].get('consumption_timestamp'), date_now_iso.replace('T', ' ').split('.')[0])
 
     def test_api_update_consumption(self):
+        cookies = self._set_cookies()
+
         try:
             consumption_id = self.env.ref('somit_telecom.telecom_service_consumption_demo_test_2').id
         except:
             return
-
-        url = f'{self.server_base_url}/telecomservice/api/consumption/update/{consumption_id}'
+        
+        url = f'{self.server_base_url}/telecomservice/api/v2/consumption/update/{consumption_id}'
         data = {
             "jsonrpc": "2.0",
             "params": {
-                'login': 'admin',
-                'password': 'admin',
                 'consumption_qty': 40
             },
         }
-        response = requests.post(url, headers=self.headers, data=json.dumps(data))
+        response = requests.put(url, headers=self.headers, data=json.dumps(data), cookies=cookies)
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.json().get('result')[0].get('id'), consumption_id)
         self.assertEqual(response.json().get('result')[0].get('consumption_qty'), 40)
 
     def test_api_get_consumption(self):
+        cookies = self._set_cookies()
         try:
             consumption_id = self.env.ref('somit_telecom.telecom_service_consumption_demo_test_2').id
         except:
             return
 
-        url = f'{self.server_base_url}/telecomservice/api/consumption/{consumption_id}'
-        data = {
-            "jsonrpc": "2.0",
-            "params": {
-                'login': 'admin',
-                'password': 'admin',
-            },
-        }
-        response = requests.post(url, headers=self.headers, data=json.dumps(data))
+        url = f'{self.server_base_url}/telecomservice/api/v2/consumption/{consumption_id}'
+        response = requests.get(url, headers=self.headers, data=json.dumps({}), cookies=cookies)
         
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(response.json().get('result')), 1, "One record should be returned")
@@ -122,20 +133,14 @@ class TestTelecomServiceConsumption(TransactionCase):
         self.assertEqual(response.json().get('result')[0].get('id'), consumption_id)
 
     def test_api_delete_consumption(self):
+        cookies = self._set_cookies()
         try:
             consumption_id = self.env.ref('somit_telecom.telecom_service_consumption_demo_test_1').id
         except:
             return
         
-        url = f'{self.server_base_url}/telecomservice/api/consumption/delete/{consumption_id}'
-        data = {
-            "jsonrpc": "2.0",
-            "params": {
-                'login': 'admin',
-                'password': 'admin',
-            },
-        }
-        response = requests.post(url, headers=self.headers, data=json.dumps(data))
+        url = f'{self.server_base_url}/telecomservice/api/v2/consumption/delete/{consumption_id}'
+        response = requests.delete(url, headers=self.headers, data=json.dumps({}), cookies=cookies)
         
         self.assertEqual(response.status_code, 200)
         self.assertTrue(response.json().get('result'), "Record should be deleted")
