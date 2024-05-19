@@ -44,6 +44,14 @@ class TelecomServiceConsumption(models.Model):
         for record in self:
             record.name = '%s - %s' % (record.telecom_service_name, record.consumption_timestamp)
     
+    @api.constrains('product_tmpl_id')
+    def _check_product_tmpl_id(self):
+        for record in self:
+            if not record.product_tmpl_id:
+                raise ValueError(_('Telecom Service Template is required'))
+            if not record.product_tmpl_id.categ_id.parent_id.id == self.env.ref('somit_telecom.product_category_telecom').id:
+                raise ValueError(_('Telecom Service Template must be a Telecom Service'))
+            
     @api.constrains('consumption_qty')
     def _check_consumption_qty(self):
         for record in self:
