@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Forms -->
+        <!-- Telecom Service Consumption Form -->
+        <record id="telecom_service_consumption_form" model="ir.ui.view">
+            <field name="name">telecom.service.consumption.form</field>
+            <field name="model">telecom.service.consumption</field>
+            <field name="arch" type="xml">
+                <form string="Telecom Service Consumption">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                            <p>
+                                <field name="company_id" options="{'no_open': True}" readonly="1" />
+                            </p>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="product_tmpl_id" required="1"/>
+                                <field name="telecom_service_name" readonly="1"/>
+                                <field name="category_code" readonly="1"/>
+                                <field name="consumption_reference" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="consumption_timestamp" required="1"/>
+                                <field name="consumption_qty" required="1"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- Tree Views -->
+        <!-- Telecom Service Consumption Tree -->
+        <record id="telecom_service_consumption_tree" model="ir.ui.view">
+            <field name="name">telecom.service.consumption.tree</field>
+            <field name="model">telecom.service.consumption</field>
+            <field name="arch" type="xml">
+                <tree string="Telecom Service Consumption">
+                    <field name="consumption_timestamp"/>
+                    <field name="consumption_reference"/>
+                    <field name="consumption_qty"/>
+                    <field name="category_code" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Graph Views-->
+        <!-- Telecom Service Consumption Graph -->
+        <record id="telecom_service_consumption_graph" model="ir.ui.view">
+            <field name="name">telecom.service.consumption.graph</field>
+            <field name="model">telecom.service.consumption</field>
+            <field name="arch" type="xml">
+                <graph string="Telecom Service Consumption" type="bar">
+                    <field name="category_code"/>
+                    <field name="consumption_timestamp"/>
+                    <field name="consumption_qty" operator="+"/>
+                </graph>
+            </field>
+        </record>
+
+        <!-- Search views -->
+        <!-- Telecom Service Consumption Search -->
+        <record id="telecom_service_consumption_search" model="ir.ui.view">
+            <field name="name">telecom.service.consumption.search</field>
+            <field name="model">telecom.service.consumption</field>
+            <field name="arch" type="xml">
+                <search string="Telecom Service Consumption">
+                    <field name="consumption_timestamp"/>
+                    <field name="consumption_reference"/>
+                    <field name="consumption_qty"/>
+                    <field name="category_code" />
+                    <filter 
+                        name="last_month_consumption"
+                        string="Last Month"
+                        domain="[('consumption_timestamp', '&gt;', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d 00:00:00'))]"
+                    />
+                    <group expand="0" string="Group By">
+                        <filter name="group_by_category_code" string="Group By Category Code" context="{'group_by':'category_code'}"/>
+                        <filter 
+                            name="group_by_consumption_timestamp_quarter"
+                            string="Group By Consumption Timestamp"
+                            context="{'group_by':'consumption_timestamp:quarter'}"
+                        />
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Actions -->
+        <!-- Telecom Services Action -->
+        <record id="telecom_service_action" model="ir.actions.act_window">
+            <field name="name">Telecom Services</field>
+            <field name="res_model">product.template</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain" eval="[('categ_id.parent_id', '=', ref('somit_telecom.product_category_telecom'))]"/>
+        </record>
+        <!-- Telecom Service Consumption Action -->
+        <record id="telecom_service_consumption_action" model="ir.actions.act_window">
+            <field name="name">Telecom Service Consumption</field>
+            <field name="res_model">telecom.service.consumption</field>
+            <field name="view_mode">tree,form,graph</field>
+        </record>
+
+        <!-- Menus -->
+        <!-- Telecom Service Consumption Menu (Base Menu) -->
+        <menuitem 
+            id="telecom_service_consumption_menu" 
+            name="Telecom Service Consumption" 
+            parent="" 
+            action="telecom_service_consumption_action"
+        />
+        <!-- Telecom Service Menu (To list available telecom services - product.tempalte records) -->
+        <menuitem 
+            id="telecom_service_menu" 
+            name="Telecom Services" 
+            parent="telecom_service_consumption_menu" 
+            action="telecom_service_action" 
+        />
+    </data>
+</odoo>

@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* somit_telecom
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-19 15:42+0000\n"
+"PO-Revision-Date: 2024-05-19 15:42+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: somit_telecom
+#: model:product.template,name:somit_telecom.product_template_telecom_adsl
+msgid "ADSL"
+msgstr "ADSL"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__category_code
+msgid "Category Code"
+msgstr "Código de la Categoría"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__category_name
+msgid "Category Name"
+msgstr "Nombre de la Categoría"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_product_category__code
+msgid "Code"
+msgstr "Código"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__company_id
+msgid "Company"
+msgstr "Compañía"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__consumption_qty
+msgid "Consumption Quantity"
+msgstr "Cantidad de Consumo"
+
+#. module: somit_telecom
+#. odoo-python
+#: code:addons/somit_telecom/models/telecom_sc.py:0
+#, python-format
+msgid "Consumption Quantity must be greater than 0"
+msgstr "La cantidad de consumo debe ser mayor que 0"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__consumption_timestamp
+msgid "Consumption Timestamp"
+msgstr "Fecha de Consumo"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: somit_telecom
+#: model:product.template,name:somit_telecom.product_template_telecom_fiber
+msgid "Fiber"
+msgstr "Fibra"
+
+#. module: somit_telecom
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_search
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: somit_telecom
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_search
+msgid "Group By Category Code"
+msgstr "Agrupar por Código de Categoría"
+
+#. module: somit_telecom
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_search
+msgid "Group By Consumption Timestamp"
+msgstr "Agrupar por Fecha de Consumo"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__id
+msgid "ID"
+msgstr "ID"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: somit_telecom
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_search
+msgid "Last Month"
+msgstr "Último Mes"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__write_uid
+msgid "Last Updated by"
+msgstr "Última Actualización por"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: somit_telecom
+#: model:product.template,name:somit_telecom.product_template_telecom_mobile_data
+msgid "Mobile data"
+msgstr "Datos Móviles"
+
+#. module: somit_telecom
+#: model:product.template,name:somit_telecom.product_template_telecom_mobile_voice
+msgid "Mobile voice"
+msgstr "Voz Móvil"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: somit_telecom
+#. odoo-python
+#: code:addons/somit_telecom/models/telecom_sc.py:0
+#, python-format
+msgid "New"
+msgstr "Nuevo"
+
+#. module: somit_telecom
+#: model:ir.model,name:somit_telecom.model_product_category
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__category_id
+msgid "Product Category"
+msgstr "Categoría de Producto"
+
+#. module: somit_telecom
+#: model:ir.actions.act_window,name:somit_telecom.telecom_service_consumption_action
+#: model:ir.ui.menu,name:somit_telecom.telecom_service_consumption_menu
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_form
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_graph
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_search
+#: model_terms:ir.ui.view,arch_db:somit_telecom.telecom_service_consumption_tree
+msgid "Telecom Service Consumption"
+msgstr "Consumo de Servicio Telecom"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__consumption_reference
+msgid "Telecom Service Consumption Reference"
+msgstr "Referencia Interna de Servicio Telecom"
+
+#. module: somit_telecom
+#: model:ir.model,name:somit_telecom.model_telecom_service_consumption
+msgid "Telecom Service Management Model"
+msgstr "Model de Gestión de Servicio Telecom"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__telecom_service_name
+msgid "Telecom Service Name"
+msgstr "Nombre de Servicio Telecom"
+
+#. module: somit_telecom
+#: model:ir.model.fields,field_description:somit_telecom.field_telecom_service_consumption__product_tmpl_id
+msgid "Telecom Service Template"
+msgstr "Plantilla de Servicio Telecom"
+
+#. module: somit_telecom
+#: model:ir.actions.act_window,name:somit_telecom.telecom_service_action
+#: model:ir.ui.menu,name:somit_telecom.telecom_service_menu
+msgid "Telecom Services"
+msgstr "Servicios de Telecomunicaciones"

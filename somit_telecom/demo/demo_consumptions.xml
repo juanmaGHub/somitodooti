@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="telecom_service_consumption_demo_1" model="telecom.service.consumption">
+            <field name="product_tmpl_id" ref="somit_telecom.product_template_telecom_adsl"/>
+            <field name="consumption_timestamp">1605892270</field>
+            <field name="consumption_qty">13</field>
+        </record>
+        <record id="telecom_service_consumption_demo_2" model="telecom.service.consumption">
+            <field name="product_tmpl_id" ref="somit_telecom.product_template_telecom_adsl"/>
+            <field name="consumption_timestamp">1605892270</field>
+            <field name="consumption_qty">11</field>
+        </record>
+        <record id="telecom_service_consumption_demo_3" model="telecom.service.consumption">
+            <field name="product_tmpl_id" ref="somit_telecom.product_template_telecom_mobile_data"/>
+            <field name="consumption_timestamp">1605892270</field>
+            <field name="consumption_qty">23</field>
+        </record>
+        <record id="telecom_service_consumption_demo_test_1" model="telecom.service.consumption">
+            <field name="product_tmpl_id" ref="somit_telecom.product_template_telecom_mobile_data"/>
+            <field name="consumption_timestamp">1605892270</field>
+            <field name="consumption_qty">21</field>
+        </record>
+        <record id="telecom_service_consumption_demo_test_2" model="telecom.service.consumption">
+            <field name="product_tmpl_id" ref="somit_telecom.product_template_telecom_fiber"/>
+            <field name="consumption_timestamp">1605892270</field>
+            <field name="consumption_qty">14</field>
+        </record>
+    </data>
+</odoo>
